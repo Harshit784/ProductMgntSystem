@@ -9,9 +9,9 @@ namespace ServiceLayer
 {
     public interface ICustomerOperations
     {
-        /*IList<Customer> GetCustomerDetails();
+        IList<Customer> GetCustomerDetails();
         void AddCustomer(Customer customer);
         void UpdateCustomer(Customer customer);
-        void DeleteCustomer(Customer customer);*/
+        void DeleteCustomer(Customer customer);
     }
 }
