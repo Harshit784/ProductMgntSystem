@@ -20,6 +20,12 @@ namespace ServiceLayer
             _productContext.Add<ProductService>(product);
             _productContext.SaveChanges();
         }
+        
+        public void UpdateProduct(ProductService product)
+        {
+            _productContext.Update<ProductService>(product);
+            _productContext.SaveChanges();
+        }
 
         public void UpdateProduct(ProductService product)
         {
