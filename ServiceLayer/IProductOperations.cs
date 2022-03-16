@@ -11,7 +11,7 @@ namespace ServiceLayer
     {
         IList<ProductService> GetProductDetails();
 
-        ProductService GetByCategory(string product_catg);
+        ProductService GetByCategory(string catg);
 
        
         void DeleteProductCategory(string categ);

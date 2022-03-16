@@ -10,7 +10,7 @@ using RepositoryLayer;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20220316112510_ProductProj")]
+    [Migration("20220316155754_ProductProj")]
     partial class ProductProj
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

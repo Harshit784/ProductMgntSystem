@@ -22,9 +22,9 @@ namespace ServiceLayer
 
         }
 
-        public ProductService GetByCategory(string product_catg)
+        public ProductService GetByCategory(string catg)
         {
-            return _productContext.Find<ProductService>(product_catg);
+            return _productContext.Find<ProductService>(catg);
         }
 
         public IList<ProductService> GetProductDetails()

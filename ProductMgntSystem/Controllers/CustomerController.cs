@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DomainLayer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer;
 using System;
@@ -12,29 +13,38 @@ namespace ProductMgntSystem.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ProductOperations _productOperations;
+        private readonly IProductOperations _productOperations;
 
-        public CustomerController(ProductOperations productOperations)
+        public CustomerController(IProductOperations productOperations)
         {
             _productOperations = productOperations;
         }
-        [HttpGet(nameof(GetProductDetails))]
+        [HttpGet]
+        [Route("action")]
 
-        public IActionResult GetProductDetails()
+        public ActionResult GetProductDetails()
         {
             var products = _productOperations.GetProductDetails();
-            try
-            {
+            
                 if (products == null)
                 {
                     return NotFound();
                 }
                 return Ok(products);
-            }
-            catch (Exception)
+            
+            
+         }
+        [HttpGet]
+        public ActionResult GetByCategory(string catg)
+        {
+            var categ=_productOperations.GetByCategory(catg);
+            if(categ!=null)
             {
-                return BadRequest();
+                return Ok(categ);
             }
+
+            return BadRequest();
+
         }
     }
 }

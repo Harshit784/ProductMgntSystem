@@ -30,6 +30,7 @@ namespace ProductMgntSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMvc();
             services.AddScoped<IProductOperations, ProductOperations>();
             services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConStr")));
 
