@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer
 {
-     public interface IProductOperations
+    public interface IProductOperations
     {
         IList<ProductService> GetProductDetails();
 
         ProductService GetByCategory(string product_catg);
 
-        void AddProduct(ProductService product);
-        void UpdateProduct(ProductService product);
-        void DeleteProduct(ProductService product);
+       
+        void DeleteProductCategory(string categ);
+        void AddCustomer(Customer customer);
+        void SearchOrderProducts(int orderId);
+        void SearchOrderDate(DateTime orderDate );
+
     }
+       
 }

@@ -15,21 +15,9 @@ namespace ServiceLayer
         {
             _productContext = productContext;
         }
-        public void AddProduct(ProductService product)
-        {
-            _productContext.Add<ProductService>(product);
-            _productContext.SaveChanges();
-        }
-        
-        public void UpdateProduct(ProductService product)
-        {
-            _productContext.Update<ProductService>(product);
-            _productContext.SaveChanges();
-        }
-
         
 
-        public void DeleteProduct(ProductService product)
+        public void DeleteProductCategory(string categ)
         {
 
         }
@@ -44,6 +32,20 @@ namespace ServiceLayer
             return _productContext.Set<ProductService>().ToList();
         }
 
-        
+        public void AddCustomer(Customer customer)
+        {
+            _productContext.Add<Customer>(customer);
+            _productContext.SaveChanges();
+        }
+        public void SearchOrderProducts(int orderId)
+        {
+            _productContext.Find<Customer>(orderId);
+
+        }
+
+        public void SearchOrderDate(DateTime orderDate)
+        {
+            _productContext.Find<CustomerOrder>(orderDate);
+        }
     }
 }
