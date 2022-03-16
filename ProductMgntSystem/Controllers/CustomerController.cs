@@ -46,5 +46,24 @@ namespace ProductMgntSystem.Controllers
             return BadRequest();
 
         }
+        [HttpPut]
+        [Route("AddCustomer")]
+        public ActionResult AddCustomer(Customer cust)
+        {
+            _productOperations.AddCustomer(cust);
+            return Ok("Customer Added");
+        }
+        [HttpDelete]
+        [Route("Delete_Categ")]
+        public ActionResult DeleteProductCategory(string categ)
+        {
+            ProductService ps = new GetByCategory(categ);
+            if (categ != null)
+            {
+                _productOperations.Remove<ProductService>(categ);
+                return Ok("Category Deleted");
+            }
+            return NotFound();
+        }
     }
 }
