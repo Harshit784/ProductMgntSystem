@@ -27,11 +27,7 @@ namespace ServiceLayer
             _productContext.SaveChanges();
         }
 
-        public void UpdateProduct(ProductService product)
-        {
-            _productContext.Update<ProductService>(product);
-            _productContext.SaveChanges();
-        }
+        
 
         public void DeleteProduct(ProductService product)
         {
