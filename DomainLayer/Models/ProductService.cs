@@ -10,10 +10,9 @@ namespace DomainLayer.Models
     public class ProductService
     {
         public string productName { get; set; }
-        public int productId { get; set; }
         [Key]
+        public int productId { get; set; }
+        
         public string productCategory { get; set; }
-        public int OrderId { get; set; }
-
     }
 }

@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Models
 {
-    public class Customer
+    public class CustomerOrder
     {
         [Key]
-        public int customerId { get; set; }
-        
-        public string customerName { get; set; }
-        public string Address { get; set; }
-        [ForeignKey ("OrderId")]
         public int OrderId { get; set; }
+        [ForeignKey ("customerId")]
+        public int customerId { get; set; }
+        [ForeignKey ("productId")]
+        public int productId { get; set; }
 
+        public DateTime OrderedDate { get; set; }
     }
 }
