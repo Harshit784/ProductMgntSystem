@@ -13,14 +13,12 @@ namespace ServiceLayer
 
         //ProductService GetByCategory(string catg);
 
-        //ProductService SearchByCategory(string catg);
-        void DeleteProductCategory(ProductService product);
-        void AddCustomer(Customer customer);
-        CustomerOrder SearchOrderProducts(int orderId);
-        void SearchOrderDate(DateTime orderDate);
+        Task DeleteProductCategory(ProductService product);
+        Task AddCustomer(Customer customer);
+        Task<CustomerOrder> SearchOrderProducts(int orderId);
 
-        ProductService GetProductName(int prductId);
-        void AddProduct(ProductService prod);
+        Task<ProductService> GetProductName(int prductId);
+        Task AddProduct(ProductService prod);
 
     }
 

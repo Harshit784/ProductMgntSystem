@@ -17,68 +17,48 @@ namespace ServiceLayer
         }
 
 
-        public void DeleteProductCategory(ProductService product)
+        public async Task DeleteProductCategory(ProductService product)
         {
-            //ProductService prodServ = SearchByCategory(categ);
-            //if(prodServ != null)
-            //{
+            
             _productContext.Remove<ProductService>(product);
-            _productContext.SaveChanges();
+           await _productContext.SaveChangesAsync();
 
         }
 
-        public ProductService GetByCategory(string catg)
-        {
-            return _productContext.Find<ProductService>(catg);
-        }
+        //public ProductService GetByCategory(string catg)
+        //{
+        //    return _productContext.Find<ProductService>(catg);
+        //}
 
         public async Task<IList<ProductService>> GetProductDetails()
         {
             await Task.Delay(1000);
-            return _productContext.Set<ProductService>().ToList();
+            return  _productContext.Set<ProductService>().ToList();
         }
 
-        public void AddCustomer(Customer customer)
+        public async Task AddCustomer(Customer customer)
         {
             _productContext.Add<Customer>(customer);
             
-            _productContext.SaveChanges();
+           await _productContext.SaveChangesAsync();
         }
-        public CustomerOrder SearchOrderProducts(int orderId)
+        public async Task<CustomerOrder> SearchOrderProducts(int orderId)
         {
 
-            return _productContext.Find<CustomerOrder>(orderId);
-
+            return await _productContext.FindAsync<CustomerOrder>(orderId);
 
         }
-
-        public void SearchOrderDate(DateTime orderDate)
+        public async Task<ProductService> GetProductName(int productId)
         {
-            _productContext.Find<CustomerOrder>(orderDate);
-            _productContext.SaveChanges();
+            return await _productContext.FindAsync<ProductService>(productId);
         }
-
-        public ProductService SearchByCategory(string catg)
-        {
-
-            return _productContext.Find<ProductService>(catg);
-
-        }
-        public ProductService GetProductName(int productId)
-        {
-            return _productContext.Find<ProductService>(productId);
-        }
-        public void AddProduct(ProductService prod)
+        public async Task AddProduct(ProductService prod)
         {
 
             _productContext.Add<ProductService>(prod);
-            _productContext.SaveChanges();
+           await _productContext.SaveChangesAsync();
         }
 
-        //public async Task<IList<ProductService>> GetProductDetails()
-        //{
-        //    await Task.Delay(10);
-        //    return _productContext.Set<ProductService>().ToList();
-        //}
+        
     }
 }

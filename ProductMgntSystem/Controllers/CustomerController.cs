@@ -65,7 +65,7 @@ namespace ProductMgntSystem.Controllers
 
     [HttpPost]
     [Route(nameof(AddCustomer))]
-    public ActionResult AddCustomer(Customer customer)
+    public async Task <ActionResult> AddCustomer(Customer customer)
     {
             
             try
@@ -73,7 +73,7 @@ namespace ProductMgntSystem.Controllers
                 _logger.LogInformation("Customer -AddCustomer endpoint called");
                 if (customer != null)
                 {
-                    _productOperations.AddCustomer(customer);
+                   await _productOperations.AddCustomer(customer);
                     return Ok(customer);
                 }
             }
@@ -89,14 +89,14 @@ namespace ProductMgntSystem.Controllers
     [HttpDelete]
     [Route("DeleteProductDetails")]
 
-    public ActionResult DeleteCategory(ProductService product)
+    public async Task <ActionResult> DeleteCategory(ProductService product)
     {
             try
             {
                 _logger.LogInformation("Product -DeleteProduct endpoint called");
                 if (product != null)
                 {
-                    _productOperations.DeleteProductCategory(product);
+                   await _productOperations.DeleteProductCategory(product);
                     return Ok(product);
                 }
             }
@@ -110,12 +110,12 @@ namespace ProductMgntSystem.Controllers
         }
     [HttpGet]
     [Route("OrderDetails")]
-    public ActionResult SearchOrderProducts(int OrderId)
+    public async Task <ActionResult> SearchOrderProducts(int OrderId)
     {
             try
             {
                 _logger.LogInformation("CustomerOrder -OrderDetails endpoint called");
-                var searchh = _productOperations.SearchOrderProducts(OrderId);
+                var searchh = await _productOperations.SearchOrderProducts(OrderId);
 
                 if (searchh != null)
                 {
@@ -131,14 +131,14 @@ namespace ProductMgntSystem.Controllers
     }
     [HttpGet]
     [Route("ProductDetailsById")]
-    public ActionResult GetProductSellingHistory(int ProductId)
+    public async Task<ActionResult> GetProductSellingHistory(int ProductId)
     {
             try
             {
                 _logger.LogInformation("Product -DetailsById endpoint called");
                 if (ProductId != 0)
                 {
-                    var res = _productOperations.GetProductName(ProductId);
+                    var res = await _productOperations.GetProductName(ProductId);
                     return Ok(res);
                 }
             }
@@ -151,14 +151,14 @@ namespace ProductMgntSystem.Controllers
         }
     [HttpPost]
     [Route(nameof(AddProduct))]
-    public ActionResult AddProduct(ProductService prod)
+    public async Task<ActionResult> AddProduct(ProductService prod)
     {
             try
             {
                 _logger.LogInformation("Product -AddProduct endpoint called");
                 if (prod != null)
                 {
-                    _productOperations.AddProduct(prod);
+                   await _productOperations.AddProduct(prod);
                     return Ok(prod);
                 }
 
