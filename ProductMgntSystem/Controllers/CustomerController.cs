@@ -20,25 +20,26 @@ namespace ProductMgntSystem.Controllers
             _productOperations = productOperations;
         }
         [HttpGet]
-        [Route("action")]
+        [Route(nameof(GetProductDetails))]
 
         public ActionResult GetProductDetails()
         {
             var products = _productOperations.GetProductDetails();
-            
-                if (products == null)
-                {
-                    return NotFound();
-                }
-                return Ok(products);
-            
-            
-         }
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+            return Ok(products);
+
+
+        }
         [HttpGet]
+        [Route("get_Category")]
         public ActionResult GetByCategory(string catg)
         {
-            var categ=_productOperations.GetByCategory(catg);
-            if(categ!=null)
+            var categ = _productOperations.GetByCategory(catg);
+            if (categ != null)
             {
                 return Ok(categ);
             }
@@ -46,24 +47,63 @@ namespace ProductMgntSystem.Controllers
             return BadRequest();
 
         }
-        [HttpPut]
-        [Route("AddCustomer")]
-        public ActionResult AddCustomer(Customer cust)
+        [HttpGet]
+        [Route("Search_products")]
+        public ActionResult SearchCategory(string categ)
         {
-            _productOperations.AddCustomer(cust);
-            return Ok("Customer Added");
-        }
-        [HttpDelete]
-        [Route("Delete_Categ")]
-        public ActionResult DeleteProductCategory(string categ)
-        {
-            ProductService ps = new GetByCategory(categ);
-            if (categ != null)
+
+            try
             {
-                _productOperations.Remove<ProductService>(categ);
-                return Ok("Category Deleted");
+                var search = _productOperations.SearchByCategory(categ);
+                if (search == null)
+                    return NotFound();
+
+                return Ok(search);
             }
-            return NotFound();
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost]
+        [Route(nameof(AddCustomer))]
+        public ActionResult AddCustomer(Customer customer)
+        {
+            _productOperations.AddCustomer(customer);
+            return Ok(customer);
+        }
+
+
+        [HttpDelete]
+        [Route(nameof(DeleteCategory))]
+
+        public ActionResult DeleteCategory(ProductService product)
+        {
+            _productOperations.DeleteProductCategory(product);
+            return Ok(product);
+
+
+        }
+        [HttpGet]
+        [Route("Search_orderProducts_ToPerson")]
+        public ActionResult SearchOrderProducts(int OrderId)
+        {
+            var searchh = _productOperations.SearchOrderProducts(OrderId);
+            return Ok(searchh);
+        }
+        [HttpGet]
+        [Route("Product_Selling_History")]
+        public ActionResult GetProductSellingHistory(int ProductId)
+        {
+            var res = _productOperations.GetProductName(ProductId);
+            return Ok(res);
+        }
+        [HttpPost]
+        [Route(nameof(AddProduct))]
+        public ActionResult AddProduct(ProductService prod)
+        {
+            _productOperations.AddProduct(prod);
+            return Ok(prod);
         }
     }
 }
