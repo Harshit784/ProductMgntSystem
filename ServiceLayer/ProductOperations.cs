@@ -72,5 +72,11 @@ namespace ServiceLayer
             _productContext.Add<ProductService>(prod);
             _productContext.SaveChanges();
         }
+
+        //public async Task<IList<ProductService>> GetProductDetails()
+        //{
+        //    await Task.Delay(10);
+        //    return _productContext.Set<ProductService>().ToList();
+        //}
     }
 }
