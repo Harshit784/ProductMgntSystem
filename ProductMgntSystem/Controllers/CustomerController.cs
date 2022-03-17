@@ -35,7 +35,7 @@ namespace ProductMgntSystem.Controllers
 
         }
         [HttpGet]
-        [Route("get_Category")]
+        [Route("GetCategory")]
         public ActionResult GetByCategory(string catg)
         {
             var categ = _productOperations.GetByCategory(catg);
@@ -48,7 +48,7 @@ namespace ProductMgntSystem.Controllers
 
         }
         [HttpGet]
-        [Route("Search_products")]
+        [Route("SearchProducts")]
         public ActionResult SearchCategory(string categ)
         {
 
@@ -85,14 +85,19 @@ namespace ProductMgntSystem.Controllers
 
         }
         [HttpGet]
-        [Route("Search_orderProducts_ToPerson")]
+        [Route("ProductsToPerson")]
         public ActionResult SearchOrderProducts(int OrderId)
         {
             var searchh = _productOperations.SearchOrderProducts(OrderId);
-            return Ok(searchh);
+            
+            if (searchh != null)
+            {
+                return Ok(searchh);
+            }
+            return BadRequest();
         }
         [HttpGet]
-        [Route("Product_Selling_History")]
+        [Route("ProductSellingHistory")]
         public ActionResult GetProductSellingHistory(int ProductId)
         {
             var res = _productOperations.GetProductName(ProductId);
