@@ -18,6 +18,8 @@ namespace ProductMgntSystem
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .ConfigureLogging((logging) => { logging.AddFile("AppLogs/ProductOperations-{Date}.txt"); })
+
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
