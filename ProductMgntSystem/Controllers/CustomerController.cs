@@ -113,6 +113,7 @@ namespace ProductMgntSystem.Controllers
     {
             try
             {
+                _logger.LogInformation("CustomerOrder -OrderDetails endpoint called");
                 var searchh = _productOperations.SearchOrderProducts(OrderId);
 
                 if (searchh != null)
