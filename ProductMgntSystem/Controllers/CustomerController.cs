@@ -86,7 +86,7 @@ namespace ProductMgntSystem.Controllers
 
 
     [HttpDelete]
-    [Route("DeleteProductInCategory")]
+    [Route("DeleteProductDetails")]
 
     public ActionResult DeleteCategory(ProductService product)
     {
