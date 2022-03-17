@@ -32,14 +32,16 @@ namespace ServiceLayer
             return _productContext.Find<ProductService>(catg);
         }
 
-        public IList<ProductService> GetProductDetails()
+        public async Task<IList<ProductService>> GetProductDetails()
         {
+            await Task.Delay(1000);
             return _productContext.Set<ProductService>().ToList();
         }
 
         public void AddCustomer(Customer customer)
         {
             _productContext.Add<Customer>(customer);
+            
             _productContext.SaveChanges();
         }
         public CustomerOrder SearchOrderProducts(int orderId)

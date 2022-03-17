@@ -9,11 +9,11 @@ namespace ServiceLayer
 {
     public interface IProductOperations
     {
-        IList<ProductService> GetProductDetails();
+        Task<IList<ProductService>> GetProductDetails();
 
-        ProductService GetByCategory(string catg);
+        //ProductService GetByCategory(string catg);
 
-        ProductService SearchByCategory(string catg);
+        //ProductService SearchByCategory(string catg);
         void DeleteProductCategory(ProductService product);
         void AddCustomer(Customer customer);
         CustomerOrder SearchOrderProducts(int orderId);

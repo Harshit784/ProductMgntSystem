@@ -27,9 +27,9 @@ namespace ProductMgntSystem.Controllers
         [HttpGet]
         [Route(nameof(GetProductDetails))]
 
-        public ActionResult GetProductDetails()
+        public async Task<ActionResult> GetProductDetails()
         {
-            var products = _productOperations.GetProductDetails();
+            var products = await _productOperations.GetProductDetails();
 
             try
             {
@@ -67,6 +67,7 @@ namespace ProductMgntSystem.Controllers
     [Route(nameof(AddCustomer))]
     public ActionResult AddCustomer(Customer customer)
     {
+            
             try
             {
                 _logger.LogInformation("Customer -AddCustomer endpoint called");
