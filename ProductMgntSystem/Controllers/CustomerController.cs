@@ -29,11 +29,12 @@ namespace ProductMgntSystem.Controllers
 
         public async Task<ActionResult> GetProductDetails()
         {
+            _logger.LogInformation("Product -GetProductDetails endpoint called");
+
             var products = await _productOperations.GetProductDetails();
 
             try
             {
-                _logger.LogInformation("Product -GetProductDetails endpoint called");
 
                 if (products == null)
                 {
@@ -48,70 +49,89 @@ namespace ProductMgntSystem.Controllers
 
 
         }
-       /* [HttpGet]
-        [Route("GetCategory")]
-        public ActionResult GetByCategory(string catg)
+        [HttpPost]
+        [Route(nameof(AddProduct))]
+        public async Task<ActionResult> AddProduct(ProductService prod)
         {
-            var categ = _productOperations.GetByCategory(catg);
-            if (categ != null)
+            try
             {
-                return Ok(categ);
+                _logger.LogInformation("Product -AddProduct endpoint called");
+                if (prod != null)
+                {
+                    await _productOperations.AddProduct(prod);
+                    return Ok(prod);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Exception Occured -Exception detail", ex.InnerException);
+
             }
             return BadRequest();
-
-        }*/   
-
+        }
 
 
-    [HttpPost]
-    [Route(nameof(AddCustomer))]
-    public async Task <ActionResult> AddCustomer(Customer customer)
-    {
-            
+        /* [HttpGet]
+         [Route("GetCategory")]
+         public ActionResult GetByCategory(string catg)
+         {
+             var categ = _productOperations.GetByCategory(catg);
+             if (categ != null)
+             {
+                 return Ok(categ);
+             }
+             return BadRequest();
+
+         }*/
+
+
+
+        [HttpPost]
+        [Route(nameof(AddCustomer))]
+        public async Task<ActionResult> AddCustomer(Customer customer)
+        {
+
             try
             {
                 _logger.LogInformation("Customer -AddCustomer endpoint called");
                 if (customer != null)
                 {
-                   await _productOperations.AddCustomer(customer);
+                    await _productOperations.AddCustomer(customer);
                     return Ok(customer);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError("Exception Occured -Exception detail", ex.InnerException);
 
             }
             return BadRequest();
         }
-
-
-    [HttpDelete]
-    [Route("DeleteProductDetails")]
-
-    public async Task <ActionResult> DeleteCategory(ProductService product)
-    {
+        [HttpGet]
+        [Route("ProductDetailsById")]
+        public async Task<ActionResult> GetProductSellingHistory(int ProductId)
+        {
             try
             {
-                _logger.LogInformation("Product -DeleteProduct endpoint called");
-                if (product != null)
+                _logger.LogInformation("Product -DetailsById endpoint called");
+                if (ProductId != 0)
                 {
-                   await _productOperations.DeleteProductCategory(product);
-                    return Ok(product);
+                    var res = await _productOperations.GetProductName(ProductId);
+                    return Ok(res);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError("Exception Occured -Exception detail", ex.InnerException);
 
             }
             return NotFound();
-
         }
-    [HttpGet]
-    [Route("OrderDetails")]
-    public async Task <ActionResult> SearchOrderProducts(int OrderId)
-    {
+        [HttpGet]
+        [Route("OrderDetails")]
+        public async Task<ActionResult> SearchOrderProducts(int OrderId)
+        {
             try
             {
                 _logger.LogInformation("CustomerOrder -OrderDetails endpoint called");
@@ -128,48 +148,32 @@ namespace ProductMgntSystem.Controllers
 
             }
             return BadRequest();
-    }
-    [HttpGet]
-    [Route("ProductDetailsById")]
-    public async Task<ActionResult> GetProductSellingHistory(int ProductId)
-    {
+        }
+
+        [HttpDelete]
+        [Route("DeleteProductDetails")]
+
+        public async Task<ActionResult> DeleteCategory(ProductService product)
+        {
             try
             {
-                _logger.LogInformation("Product -DetailsById endpoint called");
-                if (ProductId != 0)
+                _logger.LogInformation("Product -DeleteProduct endpoint called");
+                if (product != null)
                 {
-                    var res = await _productOperations.GetProductName(ProductId);
-                    return Ok(res);
+                    await _productOperations.DeleteProductCategory(product);
+                    return Ok(product);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError("Exception Occured -Exception detail", ex.InnerException);
 
             }
             return NotFound();
+
         }
-    [HttpPost]
-    [Route(nameof(AddProduct))]
-    public async Task<ActionResult> AddProduct(ProductService prod)
-    {
-            try
-            {
-                _logger.LogInformation("Product -AddProduct endpoint called");
-                if (prod != null)
-                {
-                   await _productOperations.AddProduct(prod);
-                    return Ok(prod);
-                }
-
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError("Exception Occured -Exception detail", ex.InnerException);
-
-            }
-            return BadRequest();
-        }
-
+        
+        
     }
+    
 }
